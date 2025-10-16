@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For you sweet — Персонализированные полезные десерты</title>
+  <meta name="description" content="For you sweet — интернет-магазин персонализированных десертов без сахара и глютена. Конструктор десертов, подписка SweetBox, корпоративные наборы. Доставка по России." />
+  <meta property="og:title" content="For you sweet — Персонализированные полезные десерты" />
+  <meta property="og:description" content="Собери свой десерт: натуральные ингредиенты, без сахара и глютена. Подписка SweetBox и корпоративные предложения." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23ffb3c1'/%3E%3Cpath d='M20 40c6 4 18 4 24 0 0 8-8 12-12 12s-12-4-12-12z' fill='%23ff5c8a'/%3E%3Cpath d='M24 24c0-4 3-8 8-8s8 4 8 8-3 8-8 8-8-4-8-8z' fill='white'/%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#fff9fb;
+      --card:#ffffff;
+      --ink:#2b2b2b;
+      --ink-dim:#5a5a5a;
+      --brand:#ff5c8a;
+      --brand-2:#ffb3c1;
+      --ok:#2e7d32;
+      --warn:#b85c00;
+      --muted:#f3f3f4;
+      --shadow: 0 10px 30px rgba(255,92,138,.15);
+      --radius: 16px;
+      --radius-lg: 24px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', 'Helvetica Neue', Arial, 'Apple Color Emoji','Segoe UI Emoji';
+      color:var(--ink);
+      background: radial-gradient(1200px 800px at 80% -10%, #ffe3ea 0%, transparent 60%) , var(--bg);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:100%;max-width:1140px;margin:0 auto;padding:0 20px}
+    header{
+      position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(10px);
+      border-bottom:1px solid #f2e6ea; z-index:50
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+    .logo-badge{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#fff;font-weight:900}
+    .nav a.btn{margin-left:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      background:var(--brand);color:#fff;border:none;
+      padding:12px 18px;border-radius:999px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)
+    }
+    .btn.secondary{background:#fff;color:var(--brand);border:2px solid var(--brand)}
+    .btn.ghost{background:transparent;color:var(--ink);border:1px solid #e7dce0}
+    .hero{padding:64px 0 24px}
+    .grid{display:grid;gap:24px}
+    .card{background:var(--card);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:24px}
+    .hero h1{font-size:40px;line-height:1.1;margin:0 0 12px}
+    .hero p.lead{font-size:18px;color:var(--ink-dim);margin:0 0 20px}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .badge{padding:6px 10px;border-radius:999px;border:1px dashed #ffd0db;background:#fff}
+    .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
+    .kpi{background:var(--muted);border-radius:12px;padding:12px}
+    .kpi strong{display:block;font-size:20px}
+    h2{margin:34px 0 12px}
+    section{padding:18px 0}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#fff0f4;color:var(--brand);font-weight:700;font-size:12px;border:1px solid #ffd0db}
+    .list{margin:12px 0 0;padding-left:18px}
+    .list li{margin:6px 0}
+    .price{font-size:28px;font-weight:900;color:var(--brand)}
+    .muted{color:var(--ink-dim)}
+    .config-row{display:grid;gap:12px;margin:12px 0}
+    @media(min-width:860px){ .config-row{grid-template-columns:1fr 1fr} }
+    .field{display:grid;gap:6px}
+    select,.input{
+      width:100%;padding:12px 14px;border:1px solid #eadce1;border-radius:12px;background:#fff;outline:none
+    }
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip input{display:none}
+    .chip label{display:inline-block;border:1px solid #eadce1;border-radius:999px;padding:8px 12px;cursor:pointer;background:#fff}
+    .chip input:checked + label{background:var(--brand);border-color:var(--brand);color:#fff}
+    .config-summary{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:12px}
+    .divider{height:1px;background:#efeaec;margin:16px 0}
+    .cards{display:grid;gap:16px}
+    @media(min-width:960px){ .cards{grid-template-columns:repeat(3,1fr)} }
+    .product{border:1px solid #f1e6ea}
+    .product .img{
+      height:180px;border-radius:12px;background:
+        radial-gradient(200px 140px at 30% 20%, #ffe2ea 0%, transparent 60%),
+        linear-gradient(135deg,#fff,#ffeef3);
+      display:grid;place-items:center;font-weight:900;color:var(--brand)
+    }
+    .table{width:100%;border-collapse:separate;border-spacing:0 8px}
+    .table th{font-weight:800;text-align:left;padding:8px 10px}
+    .table td{background:#fff;border:1px solid #f0e1e7;padding:10px;border-radius:12px}
+    footer{margin-top:40px;padding:30px 0;border-top:1px solid #f1e2e7;background:#fff}
+    .small{font-size:12px}
+    .note{background:#fff8e6;border:1px solid #ffecb3;color:#7a5900;border-radius:12px;padding:10px 12px}
+    .ok{color:var(--ok);font-weight:700}
+    .warn{color:var(--warn);font-weight:700}
+    .grid-2{display:grid;gap:16px}
+    @media(min-width:860px){ .grid-2{grid-template-columns:1fr 1fr} }
+    .faq details{background:#fff;border:1px solid #efdee5;border-radius:12px;padding:10px 14px}
+    .faq summary{cursor:pointer;font-weight:700}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .footer-columns{display:grid;gap:16px}
+    @media(min-width:900px){ .footer-columns{grid-template-columns:2fr 1fr 1fr} }
+    .brand-title{font-size:28px;line-height:1.2;margin:0}
+    .brand-sub{margin:6px 0 0;color:var(--ink-dim)}
+    .tag{display:inline-block;font-size:12px;padding:4px 8px;border-radius:6px;background:#eef8ef;color:#2e7d32;font-weight:700}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;}
+    /* Cart */
+    .cart-btn{position:relative}
+    .cart-count{position:absolute;right:-8px;top:-8px;background:var(--brand);color:#fff;border-radius:999px;padding:2px 6px;font-size:12px;font-weight:800}
+    .cart-drawer{position:fixed;right:0;top:0;height:100%;width:360px;max-width:95vw;background:#fff;box-shadow:-10px 0 30px rgba(0,0,0,.12);transform:translateX(100%);transition:.25s;z-index:100}
+    .cart-drawer.open{transform:translateX(0)}
+    .cart-head{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid #eee}
+    .cart-body{padding:12px;display:grid;gap:10px;max-height:calc(100% - 180px);overflow:auto}
+    .cart-item{display:grid;grid-template-columns:1fr auto;gap:10px;border:1px solid #f1e1e7;border-radius:12px;padding:10px}
+    .cart-foot{position:absolute;bottom:0;left:0;right:0;padding:14px;border-top:1px solid #eee;background:#fff;display:grid;gap:10px}
+    .row{display:flex;justify-content:space-between;align-items:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-badge">FY</div>
+        <div>
+          <div class="brand-title">For you sweet</div>
+          <div class="brand-sub">Персонализированные полезные десерты</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#constructor" class="btn secondary">Собрать десерт</a>
+        <a href="#subscribe" class="btn">SweetBox 1 800 ₽/мес</a>
+        <button class="btn ghost cart-btn" id="openCart">🧺 Корзина <span class="cart-count" id="cartCount">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cart Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-head">
+      <strong>Корзина</strong>
+      <button class="btn ghost" id="closeCart">Закрыть</button>
+    </div>
+    <div class="cart-body" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="row"><span class="muted">Товары</span><strong id="subtotal">0 ₽</strong></div>
+      <div class="row"><span class="muted">Доставка</span><span class="muted">рассчитаем на шаге оплаты</span></div>
+      <div class="row"><span>Итого</span><div class="price" id="total">0 ₽</div></div>
+      <div class="row" style="gap:8px">
+        <button class="btn ghost" id="clearCart">Очистить</button>
+        <button class="btn" id="checkout">Перейти к оформлению</button>
+      </div>
+      <div class="small muted">Оплата: карты, СБП. Возврат — по политике качества.</div>
+    </div>
+  </aside>
+
+  <main>
+    <!-- HERO: оставляем только основной блок, без "Почему это работает" -->
+    <section class="hero">
+      <div class="container grid hero-grid">
+        <div class="card">
+          <span class="pill">Натурально • Без сахара и глютена • Доставка по РФ</span>
+          <h1>Собери свой десерт — вкусно, полезно, индивидуально</h1>
+          <p class="lead">Онлайн-конструктор, сезонные наборы <strong>SweetBox</strong> и корпоративные подарки. Мы готовим из натуральных ингредиентов и доставляем быстро.</p>
+          <div class="badges">
+            <span class="badge">Value-based: <strong>450–550 ₽</strong> за базу</span>
+            <span class="badge">Подписка <strong>1 800 ₽</strong> / 4 десерта</span>
+            <span class="badge">Окупаемость проекта: 22 мес</span>
+          </div>
+          <div class="cta">
+            <a class="btn" href="#constructor">Собрать десерт</a>
+            <a class="btn ghost" href="#catalog">Каталог наборов</a>
+          </div>
+          <div class="kpis">
+            <div class="kpi"><strong>38 %</strong><span class="muted">маржинальность</span></div>
+            <div class="kpi"><strong>NPV 0,28 млн</strong><span class="muted">при 12 %</span></div>
+            <div class="kpi"><strong>IRR 28 %</strong><span class="muted">инд. доходности</span></div>
+            <div class="kpi"><strong>PI 1,2</strong><span class="muted">инд. прибыльности</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="constructor">
+      <div class="container">
+        <div class="card">
+          <span class="pill">MVP-конструктор (демо)</span>
+          <h2>Соберите десерт под себя</h2>
+          <p class="muted">Выберите основу, подсластитель и добавки — мы покажем ориентировочную стоимость и калорийность. Затем добавьте в корзину.</p>
+          <div class="config-row">
+            <div class="field">
+              <label for="base">Основа (300 г)</label>
+              <select id="base">
+                <option value="Классическая,450,220">Классическая (овсяная, миндальная мука) — 450 ₽</option>
+                <option value="Протеиновая,520,210">Протеиновая (сыворотка/изолят) — 520 ₽</option>
+                <option value="Веган,500,200">Веган (рис/нут/миндаль) — 500 ₽</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sweet">Подсластитель</label>
+              <select id="sweet">
+                <option value="Эритрит/Стевия,0,0">Эритрит/Стевия (без доплаты)</option>
+                <option value="Финиковый сироп,20,10">Финиковый сироп (+20 ₽)</option>
+                <option value="Без подсластителя,0,0">Без подсластителя</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Добавки (до 3)</label>
+            <div class="chips" id="addons">
+              <span class="chip"><input type="checkbox" id="a1" data-title="Орехи" data-price="40" data-kcal="40"><label for="a1">Орехи +40 ₽</label></span>
+              <span class="chip"><input type="checkbox" id="a2" data-title="Ягоды" data-price="35" data-kcal="25"><label for="a2">Ягоды +35 ₽</label></span>
+              <span class="chip"><input type="checkbox" id="a3" data-title="Какао" data-price="30" data-kcal="15"><label for="a3">Какао +30 ₽</label></span>
+              <span class="chip"><input type="checkbox" id="a4" data-title="Протеин" data-price="45" data-kcal="60"><label for="a4">Протеин +45 ₽</label></span>
+              <span class="chip"><input type="checkbox" id="a5" data-title="Кокос" data-price="25" data-kcal="5"><label for="a5">Кокос +25 ₽</label></span>
+            </div>
+            <div class="small muted">* ограничение: не более 3 добавок</div>
+          </div>
+          <div class="config-summary">
+            <div><span class="muted">Итого:</span> <span class="price"><span id="sum">450</span> ₽</span></div>
+            <div class="muted">Оценочно: <span id="kcal">220</span> ккал</div>
+            <button class="btn" id="addCustomToCart">В корзину</button>
+            <span id="orderMsg" class="ok" style="display:none">Добавлено в корзину 🎉</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <div class="container">
+        <h2>Наборы SweetBox и бенто-десерты</h2>
+        <div class="cards">
+          <div class="card product">
+            <div class="img">SweetBox • Классика</div>
+            <h3>SweetBox «Классика»</h3>
+            <p class="muted">4 десерта недели: ваниль-миндаль, клубника, карамель финиковая, тёмный какао.</p>
+            <div class="price">1 800 ₽ / мес</div>
+            <button class="btn add-to-cart" data-title="SweetBox «Классика» (подписка)" data-price="1800">Добавить в корзину</button>
+          </div>
+          <div class="card product">
+            <div class="img">Bento • Vegan</div>
+            <h3>Бенто Vegan</h3>
+            <p class="muted">Веган-основа, ягоды и кокос. Индивидуальный рисунок, экопакет.</p>
+            <div class="price">550 ₽</div>
+            <button class="btn add-to-cart" data-title="Бенто Vegan" data-price="550">В корзину</button>
+          </div>
+          <div class="card product">
+            <div class="img">Corporate</div>
+            <h3>Корпоративные наборы</h3>
+            <p class="muted">Подарочные коробки с логотипом, карточкой-пожеланием и индивидуальным вкусом.</p>
+            <div class="price">по запросу</div>
+            <button class="btn secondary" disabled>Запросить КП</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="subscribe">
+      <div class="container grid-2">
+        <div class="card">
+          <span class="pill">Подписка</span>
+          <h2>SweetBox — 4 десерта каждый месяц</h2>
+          <p class="muted">Меню по сезону, бесплатная замена вкуса, бонусы в программе лояльности.</p>
+          <ul class="list">
+            <li>1 800 ₽ в месяц, без скрытых платежей</li>
+            <li>Пауза/пропуск в 1 клик</li>
+            <li>Скидки до 10 % для B2B</li>
+          </ul>
+          <div class="divider"></div>
+          <div class="config-summary">
+            <div class="price">1 800 ₽ / мес</div>
+            <button class="btn add-to-cart" data-title="SweetBox — подписка" data-price="1800">Добавить в корзину</button>
+            <span class="muted">Отмена в любое время</span>
+          </div>
+        </div>
+        <div class="card">
+          <span class="pill">Доставка</span>
+          <h2>Быстро и аккуратно</h2>
+          <table class="table">
+            <thead><tr><th>Способ</th><th>Срок</th><th>Примечание</th></tr></thead>
+            <tbody>
+              <tr><td>Курьер по городу</td><td>в день заказа</td><td>зона до 10 км</td></tr>
+              <tr><td>СДЭК / ПВЗ</td><td>1–3 дня</td><td>по РФ</td></tr>
+              <tr><td>Самовывоз</td><td>с 10:00 до 21:00</td><td>уточняется</td></tr>
+            </tbody>
+          </table>
+          <p class="small muted">Оплата: карты, СБП, Apple Pay/Google Pay. Холодная цепочка соблюдается.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Удалили секцию #plan по просьбе пользователя -->
+
+    <section id="about">
+      <div class="container grid-2">
+        <div class="card">
+          <span class="pill">О нас</span>
+          <h2>Кто мы</h2>
+          <p>ООО «For you sweet» — команда технологов, кондитеров и e-commerce-специалистов. Мы верим, что сладкое может быть здоровым и персональным.</p>
+          <ul class="list">
+            <li>Натуральные ингредиенты, без сахара/глютена</li>
+            <li>Экопакет, забота об устойчивости</li>
+            <li>Прозрачный состав и контроль качества</li>
+          </ul>
+        </div>
+        <div class="card faq">
+          <span class="pill">FAQ</span>
+          <h2>Частые вопросы</h2>
+          <details open>
+            <summary>Как формируется цена?</summary>
+            <p>База 450–550 ₽ + добавки. Мы используем value-based подход — вы платите за ценность и индивидуальность.</p>
+          </details>
+          <details>
+            <summary>Алергены?</summary>
+            <p>Доступны версии без лактозы и глютена. Возможны следы орехов — уточняйте при заказе.</p>
+          </details>
+          <details>
+            <summary>Оплата и возвраты</summary>
+            <p>Оплата картой/СБП/Pay. Если качество не устроило — заменим или вернём деньги согласно политике.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-columns">
+      <div>
+        <div class="logo" style="margin-bottom:8px">
+          <div class="logo-badge">FY</div>
+          <div>
+            <div class="brand-title">For you sweet</div>
+            <div class="brand-sub">Сделано с заботой о вас</div>
+          </div>
+        </div>
+        <div class="small muted">© 2025 ООО «For you sweet». Все права защищены. <span class="tag">ЗОЖ</span></div>
+        <div class="small muted">Маркетплейсы: Wildberries • Ozon • Партнёры</div>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <div class="small">Москва • Ежедневно 10:00–21:00</div>
+        <div class="small">Тел.: +7 (900) 000-00-00</div>
+        <div class="small">Telegram-бот: @foryousweet_bot</div>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <ul class="list">
+          <li><a href="#">Политика конфиденциальности</a></li>
+          <li><a href="#">Пользовательское соглашение</a></li>
+          <li><a href="#">Сертификаты качества</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    // --- HELPERS ---
+    function $(sel, ctx){ return (ctx||document).querySelector(sel); }
+    function $all(sel, ctx){ return Array.from((ctx||document).querySelectorAll(sel)); }
+    function fmt(n){ return Number(n||0).toLocaleString('ru-RU') + ' ₽'; }
+
+    // --- CART STATE ---
+    const cart = [];
+    const cartDrawer = $('#cartDrawer');
+    const openCartBtn = $('#openCart');
+    const closeCartBtn = $('#closeCart');
+    const cartItems = $('#cartItems');
+    const cartCount = $('#cartCount');
+    const subtotalEl = $('#subtotal');
+    const totalEl = $('#total');
+    const clearCartBtn = $('#clearCart');
+    const checkoutBtn = $('#checkout');
+
+    function renderCart(){
+      if(!cartItems || !cartCount || !subtotalEl || !totalEl) return;
+      cartItems.innerHTML = '';
+      let sum = 0;
+      cart.forEach((item, idx)=>{
+        sum += item.price * item.qty;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div>
+            <strong>${item.title}</strong>
+            <div class="small muted">${item.meta || ''}</div>
+            <div class="small">Кол-во: 
+              <button class="btn ghost" data-act="dec" data-i="${idx}">−</button>
+              <span class="mono">${item.qty}</span>
+              <button class="btn ghost" data-act="inc" data-i="${idx}">+</button>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div><strong>${fmt(item.price*item.qty)}</strong></div>
+            <button class="btn ghost" data-act="del" data-i="${idx}">Удалить</button>
+          </div>`;
+        cartItems.appendChild(div);
+      });
+      cartCount.textContent = cart.reduce((s,i)=>s+i.qty,0);
+      subtotalEl.textContent = fmt(sum);
+      totalEl.textContent = fmt(sum);
+
+      // Bind actions in cart list
+      $all('button[data-act]', cartItems).forEach(btn=>{
+        const i = Number(btn.dataset.i);
+        const act = btn.dataset.act;
+        btn.onclick = ()=>{
+          if(act==='del'){ cart.splice(i,1); }
+          if(act==='inc'){ cart[i].qty++; }
+          if(act==='dec'){ cart[i].qty = Math.max(1, cart[i].qty-1); }
+          renderCart();
+        }
+      });
+    }
+
+    function addToCart(title, price, meta){
+      const p = Number(price||0);
+      if(!title || isNaN(p)){ console.warn('Неверные данные addToCart', title, price); return; }
+      const existing = cart.find(i=>i.title===title && i.meta===meta && i.price===p);
+      if(existing){ existing.qty++; } else { cart.push({title, price:p, qty:1, meta}); }
+      renderCart();
+    }
+    function openCart(){ if(cartDrawer){ cartDrawer.classList.add('open'); cartDrawer.setAttribute('aria-hidden','false'); } }
+    function closeCart(){ if(cartDrawer){ cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); } }
+
+    if(openCartBtn) openCartBtn.addEventListener('click', openCart);
+    if(closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
+    if(clearCartBtn) clearCartBtn.addEventListener('click', ()=>{ cart.length=0; renderCart(); });
+    if(checkoutBtn) checkoutBtn.addEventListener('click', ()=>{
+      alert('Демо: оформление заказа. Интеграцию с оплатой подключим к CMS/боту.');
+    });
+
+    // --- CONSTRUCTOR LOGIC ---
+    const baseEl = $('#base');
+    const sweetEl = $('#sweet');
+    const addonsEl = $('#addons');
+    const sumEl = $('#sum');
+    const kcalEl = $('#kcal');
+    const addCustomBtn = $('#addCustomToCart');
+    const orderMsg = $('#orderMsg');
+
+    function getSelectedAddons(){
+      if(!addonsEl) return [];
+      const inputs = $all('input[type="checkbox"]', addonsEl);
+      const checked = inputs.filter(i=>i.checked);
+      if(checked.length>3){
+        while(inputs.filter(i=>i.checked).length>3){
+          const last = inputs.reverse().find(i=>i.checked); if(last) last.checked=false;
+        }
+      }
+      return $all('input[type="checkbox"]:checked', addonsEl);
+    }
+
+    function recalc(){
+      if(!baseEl || !sweetEl || !sumEl || !kcalEl) return;
+      const [baseTitle, basePrice, baseKcal] = (baseEl.value||'Классическая,450,220').split(',');
+      const [sweetTitle, sweetPrice, sweetKcal] = (sweetEl.value||'Эритрит/Стевия,0,0').split(',');
+      const chosen = getSelectedAddons();
+      const addPrice = chosen.reduce((s,i)=>s + Number(i.dataset.price||0), 0);
+      const addKcal = chosen.reduce((s,i)=>s + Number(i.dataset.kcal||0), 0);
+      const total = Number(basePrice||0) + Number(sweetPrice||0) + addPrice;
+      const kc = Number(baseKcal||0) + Number(sweetKcal||0) + addKcal;
+      sumEl.textContent = String(total);
+      kcalEl.textContent = String(kc);
+    }
+
+    if(baseEl) baseEl.addEventListener('change', recalc);
+    if(sweetEl) sweetEl.addEventListener('change', recalc);
+    if(addonsEl) addonsEl.addEventListener('change', recalc);
+    recalc();
+
+    if(addCustomBtn){
+      addCustomBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const [baseTitle] = (baseEl?.value||'Классическая,450,220').split(',');
+        const [sweetTitle] = (sweetEl?.value||'Эритрит/Стевия,0,0').split(',');
+        const chosen = getSelectedAddons();
+        const meta = 'Основа: ' + baseTitle + '; ' + 'Подсластитель: ' + sweetTitle + (chosen.length? '; Добавки: ' + chosen.map(c=>c.dataset.title).join(', '):'');
+        const total = Number(sumEl?.textContent||0);
+        addToCart('Собранный десерт', total, meta);
+        if(orderMsg){ orderMsg.style.display='inline'; setTimeout(()=> orderMsg.style.display='none', 1800); }
+        openCart();
+      });
+    }
+
+    // --- CATALOG BUTTONS (DELEGATION) ---
+    document.addEventListener('click', function(e){
+      const btn = e.target.closest('.add-to-cart');
+      if(btn){
+        e.preventDefault();
+        const title = btn.dataset.title;
+        const price = Number(btn.dataset.price||0);
+        addToCart(title, price);
+        openCart();
+      }
+    });
+
+    // Initial render
+    renderCart();
+    console.log('Cart ready');
+  });
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "For you sweet",
+    "url": "https://example.com",
+    "logo": "https://example.com/logo.svg",
+    "sameAs": ["https://t.me/foryousweet_bot"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Москва",
+      "addressCountry": "RU"
+    },
+    "department": [{
+      "@type": "FoodEstablishment",
+      "name": "Кухня For you sweet",
+      "servesCuisine": "Десерты, здоровое питание"
+    }]
+  }
+  </script>
+</body>
+</html>
